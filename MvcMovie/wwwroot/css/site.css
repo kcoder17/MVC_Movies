@@ -41,6 +41,19 @@ html {
   min-height: 100%;
 }
 
+.body:before {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    background-image: url("https://ak6.picdn.net/shutterstock/videos/4043056/thumb/1.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100%;
+    filter: brightness(25%);
+    width: 100%;
+    height: 100%;
+}
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;

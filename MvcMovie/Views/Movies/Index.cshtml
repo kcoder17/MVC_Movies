@@ -1,0 +1,63 @@
+﻿@model MvcMovie.Models.MovieGenreViewModel
+
+@{
+    ViewData["Title"] = "View All";
+}
+<div style="color: white">
+    <h1 class="text-center" style="margin-bottom: 30px">LDS Movies</h1>
+    <a asp-action="Create" class="btn btn-primary" style="float: right; margin-top: 32px">Add New Movie</a>
+    <form asp-controller="Movies" asp-action="Index" method="get">
+        <div class="form-row">
+            <div class="form-group" style="margin-right: 6px">
+                <label asp-for="SearchString" style="font-weight: bold">Title</label>
+                <input asp-for="SearchString" class="form-control" />
+            </div>
+            <div class="form-group" style="margin-right: 6px">
+                <label asp-for="MovieGenre" style="font-weight: bold">Genre</label>
+                <select asp-for="MovieGenre" asp-items="Model.Genres" class="form-control">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit" value="Filter" style="margin-top: 32px" />
+            </div>
+        </div>
+    </form>
+    <div class="form-row" style="padding: 15px 0; border-top: 2px solid white; border-bottom: 2px solid white; margin-bottom: 0">
+        <strong class="form-inline col-md-10">
+            <span class="col-md-3">
+                @Html.DisplayNameFor(model => model.Movies[0].Title)
+            </span>
+            <span class="col-md-2">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">
+                    @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
+                </a>
+            </span>
+            <span class="col-md-3">
+                @Html.DisplayNameFor(model => model.Movies[0].Genre)
+            </span>
+            <span class="col-md-2">
+                @Html.DisplayNameFor(model => model.Movies[0].Price)
+            </span>
+            <span class="col-md-2">
+                @Html.DisplayNameFor(model => model.Movies[0].Rating)
+            </span>
+        </strong>
+    </div>
+    @foreach (var item in Model.Movies)
+    {
+        <div class="form-row" style="padding: 15px 0; border-bottom: 1px solid white; margin-bottom: 0">
+            <a asp-action="Details" asp-route-id="@item.Id" class="form-inline col-md-10">
+                <div class="col-md-3">@Html.DisplayFor(modelItem => item.Title)</div>
+                <div class="col-md-2">@Html.DisplayFor(modelItem => item.ReleaseDate)</div>
+                <div class="col-md-3">@Html.DisplayFor(modelItem => item.Genre)</div>
+                <div class="col-md-2">@Html.DisplayFor(modelItem => item.Price)</div>
+                <div class="col-md-2">@Html.DisplayFor(modelItem => item.Rating)</div>
+            </a>
+            <div class="col-md-2">
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" style="float: right; margin-right: 15px; padding: 0 5px">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm" style="float: right; margin-right: 10px; padding: 0 12px">Edit</a>
+            </div>
+        </div>
+    }
+</div>
